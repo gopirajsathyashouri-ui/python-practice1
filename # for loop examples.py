@@ -1,0 +1,9 @@
+# for loop examples
+
+#numbers = [1, 2, 3, 4, 5]
+#for number in numbers:
+#    print(number)
+
+for character in "Hello":
+    print(character)
+    
