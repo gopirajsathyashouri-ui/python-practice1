@@ -1,0 +1,53 @@
+#Create Date and Delivery Features
+import pandas as pd
+import numpy as np
+
+
+def add_delivery_features(order_records):
+    columns = [
+        "Order_ID",
+        "Order_Date",
+        "Delivery_Days"
+    ]
+    order_records = pd.DataFrame(order_records, columns=columns)
+    order_records["Order_Date"] = pd.to_datetime(order_records["Order_Date"])
+    order_records["Delivery_Days"] = order_records["Delivery_Days"].astype(int)
+    order_records["Order_Month"] = order_records["Order_Date"].dt.strftime("%B")
+
+    order_records["Delivery_Status"] = np.where(
+        order_records["Delivery_Days"] > 5,
+        "Delayed",
+        "On Time"
+    )
+
+    order_records["Order_Date"] = order_records["Order_Date"].dt.strftime("%Y-%m-%d")
+
+    return order_records[
+        [
+            "Order_ID",
+            "Order_Date",
+            "Order_Month",
+            "Delivery_Days",
+            "Delivery_Status"
+        ]
+    ].values.tolist()
+
+
+def solve():
+    n = int(input())
+
+    order_records = []
+
+    for _ in range(n):
+        order_id, order_date, delivery_days = input().split()
+
+        order_records.append([
+            order_id,
+            order_date,
+            float(delivery_days)
+        ])
+
+    print(add_delivery_features(order_records))
+
+
+solve()
