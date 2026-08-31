@@ -1,0 +1,12 @@
+import requests
+
+url = "https://disease.sh/v3/covid-19/countries"
+
+response = requests.get(url, timeout=30)
+
+if response.status_code == 200:
+    data = response.json()
+    print("API request successful")
+    print(f"Countries received: {len(data)}")
+else:
+    print(f"API request failed: {response.status_code}")
