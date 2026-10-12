@@ -1,0 +1,6 @@
+lst = eval(input())
+maximum = max(lst)
+minimum = min(lst)
+print(maximum)
+print(minimum)
+print(maximum - minimum)
