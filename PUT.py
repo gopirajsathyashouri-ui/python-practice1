@@ -1,15 +1,15 @@
-import requests 
+import requests
 BASE_URL = "http://4.186.26.27:8787"
-def test_add_employee():
-    new_employee = {
-        "id": 20,
-        "name": "emma",
-        "age": 30,
+def test_update_employee(emp_id):
+    updated_employee = {
+        "id": emp_id,  # ID must match the one being updated
+        "name": "emma_updated",
+        "age": 31,
         "gender": "female",
         "department": "sales",
-        "salary": 900000
+        "salary": 950000
     }
-    response = requests.post(f"{BASE_URL}/employees", json=new_employee)
-    print("POST /employees:", response.json())
+    response = requests.put(f"{BASE_URL}/employees/{emp_id}", json=updated_employee)
+    print(f"PUT /employees/{emp_id}:", response.json())
 
-test_add_employee()
+test_update_employee(10)
